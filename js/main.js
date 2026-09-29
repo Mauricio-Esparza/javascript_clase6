@@ -9,53 +9,62 @@ class Producto {
     aplicarDescuento(porcentaje) {
         const descuento = this.precio * (porcentaje / 100);
         this.precio -= descuento;
-        console.log(`se aplico un ${porcentaje}% de descuento a "${this.nombre}". nuevo precio: ${this.precio}`);
-        alert(`se aplico un ${porcentaje}% de descuento a "${this.nombre}". nuevo precio: ${this.precio}`);
+        const mensaje = "Se aplico un " + porcentaje + "% de descuento a " + this.nombre + ". Nuevo precio: " + this.precio;
+        console.log(mensaje);
+        alert(mensaje);
     }
 }
 
 const productos = [
-    new Producto(1, "vela de lavanda", 1500, 10),
-    new Producto(2, "vela de vainilla", 1800, 5),
-    new Producto(3, "vela de canela", 2500, 3),
-    new Producto(4, "vela de rosa", 2500, 3),
-    new Producto(5, "vela de jazmin", 1200, 12),
+    new Producto(1, "Vela de Lavanda", 1500, 10),
+    new Producto(2, "Vela de Vainilla", 1800, 5),
+    new Producto(3, "Vela de Canela", 2500, 3),
+    new Producto(4, "Vela de Rosa", 2500, 3),
+    new Producto(5, "Vela de Jazmin", 1200, 12),
 ];
 
 function mostrarCatalogo() {
-    let mensaje = "catalgo de productos:\n";
-    productos.forEach(p => {
-        mensaje += `ID: ${p.id} | ${p.nombre} | Precio: $${p.precio} | Stock: ${p.stock}\n`;
+    let mensaje = "Catalogo de productos:\n";
+    productos.forEach(function(p) {
+        mensaje += "ID: " + p.id + " | " + p.nombre + " | Precio: $" + p.precio + " | Stock: " + p.stock + "\n";
     });
     console.log(mensaje);
     alert(mensaje);
 }
 
 function filtrarPorPrecioMinimo() {
-    const minimo = parseInt(prompt("ingresa el precio minimo:"));
-    const filtrados = productos.filter(p => p.precio >= minimo);
-    let mensaje = `productos con precio mayor o igual a $${minimo}:\n`;
-    filtrados.forEach(p => mensaje += `${p.nombre} - $${p.precio}\n`);
+    const minimo = parseInt(prompt("Ingresa el precio minimo:"));
+    const filtrados = productos.filter(function(p) {
+        return p.precio >= minimo;
+    });
+    let mensaje = "Productos con precio mayor o igual a $" + minimo + ":\n";
+    filtrados.forEach(function(p) {
+        mensaje += p.nombre + " - $" + p.precio + "\n";
+    });
     console.log(mensaje);
     alert(mensaje);
 }
 
 function buscarPorId() {
-    const id = parseInt(prompt("ingresa el ID del producto:"));
-    const encontrado = productos.find(p => p.id === id);
+    const id = parseInt(prompt("Ingresa el ID del producto:"));
+    const encontrado = productos.find(function(p) {
+        return p.id === id;
+    });
     if (encontrado) {
-        const mensaje = `producto encontrado: ${encontrado.nombre} - $${encontrado.precio}`;
+        const mensaje = "Producto encontrado: " + encontrado.nombre + " - $" + encontrado.precio;
         console.log(mensaje);
         alert(mensaje);
     } else {
-        console.log("no existe un producto con ese ID.");
-        alert("no existe un producto con ese ID.");
+        console.log("No existe un producto con ese ID.");
+        alert("No existe un producto con ese ID.");
     }
 }
 
 function calcularTotalStock() {
-    const total = productos.reduce((accum, p) => accum + (p.precio * p.stock), 0);
-    const mensaje = `valor total del stock: $${total}`;
+    const total = productos.reduce(function(accum, p) {
+        return accum + (p.precio * p.stock);
+    }, 0);
+    const mensaje = "Valor total del stock: $" + total;
     console.log(mensaje);
     alert(mensaje);
 }
@@ -65,11 +74,11 @@ function menu() {
     do {
         opcion = prompt(
             "Bienvenido a Genova Velas de Soja\n" +
-            "1 ver catalogo\n" +
-            "2 filtrar productos por precio minimo\n" +
-            "3 buscar producto por ID\n" +
-            "4 calcular valor total del stock\n" +
-            "5 salir\n" +
+            "1 - Ver catalogo\n" +
+            "2 - Filtrar productos por precio minimo\n" +
+            "3 - Buscar producto por ID\n" +
+            "4 - Calcular valor total del stock\n" +
+            "5 - Salir\n" +
             "Elegi una opcion:"
         );
 
@@ -87,12 +96,12 @@ function menu() {
                 calcularTotalStock();
                 break;
             case "5":
-                console.log("gracias por visitarnos!");
-                alert("gracias por visitarnos!");
+                console.log("Gracias por visitarnos!");
+                alert("Gracias por visitarnos!");
                 break;
             default:
-                console.log("opcion invalida, intenta nuevamente");
-                alert("opcion invalida, intenta nuevamente");
+                console.log("Opcion invalida, intenta nuevamente.");
+                alert("Opcion invalida, intenta nuevamente.");
         }
     } while (opcion !== "5");
 }
